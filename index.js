@@ -3,9 +3,7 @@ const mongoose = require('mongoose')
 const rjwt = require('restify-jwt-community')
 const config = require('./config')
 const cors = require('cors')
-const allowedOrigins = [
-    process.env.ALLOWED_URL, 'http://localhost:' + config.PORT
-];
+const allowedOrigins = process.env.ALLOWED_URL.split(',');
 
 const server = restify.createServer()
 

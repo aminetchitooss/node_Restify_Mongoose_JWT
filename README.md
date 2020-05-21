@@ -18,11 +18,9 @@
     
 ```bash
 NODE_ENV = development
-PORT = 3000
-BASE_URL =  http://localhost:3000
 MONGODB_URI =  mongodb+srv://<username>:<passwor>XXXXXX
 JWT_SECRET = XXXX
-ALLOWED_URL = the url of access
+ALLOWED_URL = list of authorized url to access "xxxxx,yyyyyy,zzzzz"
 ```
   then run these commands 
   
