@@ -2,8 +2,9 @@ const restify = require('restify')
 const mongoose = require('mongoose')
 const rjwt = require('restify-jwt-community')
 const config = require('./config')
+const cors = require('cors')
 const allowedOrigins = [
-    process.env.ALLOWED_URL, 'http://localhost:' + port
+    process.env.ALLOWED_URL, 'http://localhost:' + config.PORT
 ];
 
 const server = restify.createServer()
@@ -24,12 +25,15 @@ server.use(cors({
 }));
 
 //protect routes
-server.use(rjwt({ secret: config.JWT_SECRET }).unless({ path: ['/auth'] }))
+server.use(rjwt({ secret: config.JWT_SECRET }).unless({ path: ['/auth', '/'] }))
 
 server.listen(config.PORT, () => {
     mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
 })
 
+server.get('/', (req, res)=>{
+    res.end('<h1>Using restify, mongoose and JWT</h1>')
+})
 const db = mongoose.connection
 
 db.on('error', (err) => console.log('wroong DB', err))
